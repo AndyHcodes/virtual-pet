@@ -45,7 +45,7 @@ describe("constructor", () => {
 });
 
 describe("walk", () => {
-  it("increases fitness by 4", () => {
+  xit("increases fitness by 4", () => {
     const pet = new Pet("fido");
 
     pet.fitness = 4;
@@ -56,12 +56,35 @@ describe("walk", () => {
 });
 
 describe("hunger", () => {
-  it("decrease hunger by 3 to a minimum of 0", () => {
+  xit("decrease hunger by 3 to a minimum of 0", () => {
     const pet = new Pet("fido");
 
     pet.hunger = 3;
     pet.feed();
 
     expect(pet.hunger).toEqual(0);
+  });
+});
+
+describe("checkup", () => {
+  it("checks hunger and fitness of pet", () => {
+    const pet = new Pet("fido");
+
+    pet.fitness = 3;
+    pet.hunger = 6;
+    pet.checkUp();
+
+    expect(pet.checkUp()).toEqual("I need a walk and I am hungry");
+  });
+});
+
+describe("checkup", () => {
+  it("checks hunger and fitness of pet", () => {
+    const pet = new Pet("fido");
+
+    pet.fitness = 4;
+    pet.checkUp();
+
+    expect(pet.checkUp()).toEqual("I feel great");
   });
 });
