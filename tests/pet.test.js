@@ -25,9 +25,21 @@ describe("growUp", () => {
 });
 
 describe("constructor", () => {
-  it("sets the name property", () => {
+  xit("sets the name property", () => {
     const pet = new Pet("Fido");
 
     expect(pet.name).toEqual("Fido");
+  });
+});
+
+describe("constructor", () => {
+  it("Increments the age by 1, hunger by 5 and fitness by -3", () => {
+    const pet = new Pet("Fido");
+
+    pet.growUp();
+
+    expect(pet.age).toEqual(1);
+    expect(pet.hunger).toEqual(5);
+    expect(pet.fitness).toEqual(7);
   });
 });
