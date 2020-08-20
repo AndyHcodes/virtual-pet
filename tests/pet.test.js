@@ -55,13 +55,13 @@ describe("walk", () => {
   });
 });
 
-describe("walk", () => {
-  it("increases fitness by to a maximum of 10", () => {
+describe("hunger", () => {
+  it("decrease hunger by 3 to a minimum of 0", () => {
     const pet = new Pet("fido");
 
-    pet.fitness = 8;
-    pet.walk();
+    pet.hunger = 3;
+    pet.feed();
 
-    expect(pet.fitness).toEqual(10);
+    expect(pet.hunger).toEqual(0);
   });
 });

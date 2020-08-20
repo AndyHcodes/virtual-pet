@@ -1,5 +1,7 @@
 const MAXIMUM_FITNESS = 10;
 const IncInFitness = 4;
+const baseHunger = 0;
+const decInHunger = 3;
 
 function Pet(name) {
   this.name = name;
@@ -19,6 +21,14 @@ Pet.prototype.walk = function () {
     this.fitness += IncInFitness;
   } else {
     this.fitness = MAXIMUM_FITNESS;
+  }
+};
+
+Pet.prototype.feed = function () {
+  if (this.hunger - decInHunger >= baseHunger) {
+    this.hunger -= decInHunger;
+  } else {
+    this.hunger = baseHunger;
   }
 };
 
