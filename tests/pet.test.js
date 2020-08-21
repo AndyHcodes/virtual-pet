@@ -83,8 +83,8 @@ describe("checkup", () => {
     const pet = new Pet("fido");
 
     pet.fitness = 4;
-    pet.checkUp();
+    pet.checkup();
 
-    expect(pet.checkUp()).toEqual("I feel great");
+    expect(pet.checkup()).toEqual("I feel great");
   });
 });
