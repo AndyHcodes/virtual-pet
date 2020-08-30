@@ -45,7 +45,7 @@ describe("constructor", () => {
 });
 
 describe("walk", () => {
-  xit("increases fitness by 4", () => {
+  it("increases fitness by 4", () => {
     const pet = new Pet("fido");
 
     pet.fitness = 4;
@@ -74,7 +74,7 @@ describe("checkup", () => {
     pet.hunger = 6;
     pet.checkUp();
 
-    expect(pet.checkUp()).toEqual("I need a walk and I am hungry");
+    expect(pet.checkUp()).toEqual("I am hungry and I need a walk");
   });
 });
 
@@ -101,7 +101,7 @@ describe("is alive", () => {
 });
 
 describe("feed", () => {
-  it("throws an error if the pet is not alive", () => {
+  xit("throws an error if the pet is not alive", () => {
     const pet = new Pet("Fido");
 
     pet.age = 30;
@@ -111,11 +111,27 @@ describe("feed", () => {
 });
 
 describe("feed", () => {
-  it("throws an error if the pet is not alive", () => {
+  xit("throws an error if the pet is not alive", () => {
     const pet = new Pet("Fido");
 
     pet.age = 31;
 
     expect(() => pet.walk()).toThrow("Your pet is no longer alive :(");
+  });
+});
+
+describe("children", () => {
+  it("creates a child pet", () => {
+    const cat = new Pet("Dave");
+    //create pet
+    //pet adopts a child
+    cat.adoptChild("Amelia");
+    //check children attribute of pet is an array
+
+    expect(cat.children).toEqual(
+      expect.arrayContaining([
+        { name: "Amelia", age: 0, hunger: 0, fitness: 10, children: [] },
+      ])
+    );
   });
 });

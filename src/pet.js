@@ -1,67 +1,72 @@
-const MAXIMUM_FITNESS = 10;
-const IncInFitness = 4;
-const baseHunger = 0;
-const decInHunger = 3;
+class Pet {
+  constructor(name) {
+    this.name = name;
+    this.age = 0;
+    this.hunger = 0;
+    this.fitness = 10;
+    this.children = [];
+  }
 
-function Pet(name) {
-  this.name = name;
-  this.age = 0;
-  this.hunger = 0;
-  this.fitness = 10;
-}
-
-Pet.prototype = {
   get isAlive() {
-    return this.age < 30 && this.hunger < 10 && this.fitness > 0;
-  },
-};
+    if (this.fitness <= 0 || this.hunger >= 10 || this.age >= 30) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
-Pet.prototype.growUp = function () {
-  if (!this.isAlive) {
-    throw new Error("Your pet is no longer alive :(");
+  growUp() {
+    if (!this.isAlive) {
+      throw new Error("Your pet is no longer alive :(");
+    }
+    this.age += 1;
+    this.hunger += 5;
+    this.fitness -= 3;
   }
-  this.age += 1;
-  this.hunger += 5;
-  this.fitness -= 3;
-};
 
-Pet.prototype.walk = function () {
-  if (!this.isAlive) {
-    throw new Error("Your pet is no longer alive :(");
+  adoptChild(name) {
+    let child = new Pet(name);
+    this.children.push(child);
   }
-  if (this.fitness + IncInFitness <= MAXIMUM_FITNESS) {
-    this.fitness += IncInFitness;
-  } else {
-    this.fitness = MAXIMUM_FITNESS;
-  }
-};
 
-Pet.prototype.feed = function () {
-  if (!this.isAlive) {
-    throw new Error("Your pet is no longer alive :(");
+  walk() {
+    if (!this.isAlive) {
+      throw new Error("Your pet is no longer alive :(");
+    }
+    if (this.fitness + 4 <= 10) {
+      this.fitness += 4;
+    } else {
+      this.fitness = 10;
+    }
   }
-  if (this.hunger - decInHunger >= baseHunger) {
-    this.hunger -= decInHunger;
-  } else {
-    this.hunger = baseHunger;
-  }
-};
 
-Pet.prototype.checkup = function () {
-  if (!this.isAlive) {
-    throw new Error("Your pet is no longer alive :(");
+  feed() {
+    if (!this.isAlive) {
+      throw new Error("Your pet is no longer alive :(");
+    }
+    if (this.hunger - 3 >= 0) {
+      this.hunger -= 3;
+    } else {
+      this.hunger = 0;
+    }
   }
-  if (this.fitness <= 3 && this.hunger >= 5) {
-    return "I need a walk and I am hungry";
+
+  checkUp() {
+    if (!this.isAlive) {
+      throw new Error("Your pet is no longer alive :(");
+    }
+    if (this.fitness <= 3 && this.hunger >= 5) {
+      return "I am hungry and I need a walk";
+    }
+    if (this.fitness <= 3) {
+      return "I need a walk";
+    }
+    if (this.hunger >= 5) {
+      return "I am hungry";
+    } else {
+      return "I feel great";
+    }
   }
-  if (this.fitness <= 3) {
-    return "I need a walk";
-  }
-  if (this.hunger >= 5) {
-    return "I am hungry";
-  } else {
-    return "I feel great";
-  }
-};
+}
 
 module.exports = Pet;
